@@ -22,9 +22,8 @@ export const experience: Job[] = [
   {
     company: "LuminFire",
     title: "Software Engineer",
-    // TODO: confirm end date
     start: "2015",
-    end: "2021",
+    end: "July 2021",
     highlights: [
       "Developed custom WordPress themes and plugins based on client requirements.",
       "Built headless WordPress installations using the WordPress REST API and WP GraphQL.",
