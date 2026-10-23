@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+.section {
+  margin-top: 40px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
