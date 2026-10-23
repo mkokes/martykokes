@@ -17,3 +17,14 @@ body {
     display: none !important;
   }
 }
+
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.hero > div {
+  flex: 1 1 320px;
+}
