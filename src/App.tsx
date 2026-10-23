@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Hero from "./components/Hero";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
-import Sites from "./components/Sites";
 import Education from "./components/Education";
 import Interests from "./components/Interests";
 
@@ -36,7 +35,6 @@ function AppBody() {
         <Hero />
         <Experience />
         <Skills />
-        <Sites />
         <Education />
         <Interests />
       </Layout.Content>
