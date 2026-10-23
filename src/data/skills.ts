@@ -1,0 +1,55 @@
+export const skills: Record<string, string[]> = {
+  "Front end": [
+    "TypeScript",
+    "JavaScript",
+    "React",
+    "React Native",
+    "Redux",
+    "Next.js",
+    "Ant Design",
+    "Styled Components",
+    "Vite",
+    "Expo",
+    "Ionic",
+    "jQuery",
+    "HTML5",
+    "CSS3",
+    "Sass / Less",
+    "Responsive design",
+  ],
+  "APIs & data": ["GraphQL", "Apollo", "REST", "MySQL", "MongoDB"],
+  "Back end & CMS": ["Go", "PHP", "WordPress", "AWS Cognito / OIDC"],
+  Tooling: [
+    "Git",
+    "GitLab",
+    "GitHub",
+    "Bitbucket",
+    "GitLab CI",
+    "Docker",
+    "Vitest",
+    "Playwright",
+    "VS Code",
+  ],
+  "Analytics & ads": ["Google Analytics", "Webmaster Tools", "DFP", "Broadstreet Ads"],
+};
+
+export const interests = [
+  "3D printing",
+  "Arduinos",
+  "eBikes",
+  "Mopeds",
+  "Motorcycles",
+  "Auto mechanics",
+  "Video games",
+  "Photography",
+  "Tennis",
+  "Computers",
+  "Outer space / cosmology",
+  "Science fiction books",
+  "Growing mushrooms",
+  "Woodworking",
+  "Home improvement",
+];
+
+export const interestsDisclaimer =
+  "Father to triplets, so all activities and interests are subject to change.";

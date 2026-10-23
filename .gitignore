@@ -11,3 +11,10 @@ wp-content/uploads
 wp-content/wfcache
 wp-content/wflogs
 wp-config-local.php
+node_modules
+node_modules
+dist
+dev-dist
+.npm
+.DS_Store
+tsconfig.tsbuildinfo
