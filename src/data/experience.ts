@@ -13,7 +13,8 @@ export const experience: Job[] = [
     start: "July 2021",
     end: "Present",
     highlights: [
-      "Build and maintain React and TypeScript web applications, including multi-brand automotive hub portals, admin consoles and a call-center app.",
+      "Develop and maintain websites and web applications for Fortune 500 clients in the automotive industry.",
+      "Build React and TypeScript apps including multi-brand hub portals, admin consoles and a call-center app.",
       "Contribute to shared libraries: a React component library with Storybook, an OIDC / AWS Cognito authentication library and common frontend tooling.",
       "Work with Vite, Ant Design, Redux Toolkit, Vitest and Playwright, with GitLab CI/CD pipelines and Docker.",
       "Write Go services when the work calls for it.",

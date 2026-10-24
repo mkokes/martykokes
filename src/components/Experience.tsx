@@ -5,7 +5,7 @@ export default function Experience() {
   return (
     <section className="section" aria-labelledby="experience">
       <Typography.Title level={2} id="experience">
-        Experience
+        Work history
       </Typography.Title>
       <Timeline
         items={experience.map((job) => ({
