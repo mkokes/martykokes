@@ -1,22 +1,7 @@
-import { Avatar, Button, Space, Typography } from "antd";
-import {
-  GithubOutlined,
-  GitlabOutlined,
-  LinkedinOutlined,
-  MailOutlined,
-  TwitterOutlined,
-} from "@ant-design/icons";
-import type { ReactNode } from "react";
+import { Avatar, Typography } from "antd";
 import avatar from "../assets/avatar.jpg";
-import { profile, socialLinks, type SocialLink } from "../data/profile";
-
-const icons: Record<SocialLink["icon"], ReactNode> = {
-  linkedin: <LinkedinOutlined />,
-  twitter: <TwitterOutlined />,
-  github: <GithubOutlined />,
-  gitlab: <GitlabOutlined />,
-  mail: <MailOutlined />,
-};
+import { profile } from "../data/profile";
+import SocialLinks from "./SocialLinks";
 
 export default function Hero() {
   return (
@@ -33,19 +18,7 @@ export default function Hero() {
         <Typography.Paragraph style={{ fontSize: 16, maxWidth: 680 }}>
           {profile.objective}
         </Typography.Paragraph>
-        <Space wrap className="no-print">
-          {socialLinks.map((l) => (
-            <Button
-              key={l.label}
-              icon={icons[l.icon]}
-              href={l.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {l.label}
-            </Button>
-          ))}
-        </Space>
+        <SocialLinks />
       </div>
     </header>
   );

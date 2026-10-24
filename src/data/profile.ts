@@ -12,9 +12,11 @@ export interface SocialLink {
   icon: "linkedin" | "twitter" | "github" | "gitlab" | "mail";
 }
 
-// TODO: confirm the Twitter/X handle and add GitHub/GitLab/email if wanted.
 export const socialLinks: SocialLink[] = [
   { label: "LinkedIn", url: "https://www.linkedin.com/in/martykokes/", icon: "linkedin" },
-  { label: "Twitter / X", url: "https://twitter.com/martykokes", icon: "twitter" },
+  { label: "Twitter / X", url: "https://x.com/martykokes", icon: "twitter" },
   { label: "GitHub", url: "https://github.com/mkokes", icon: "github" },
 ];
+
+// Public Formspree form id; contact messages are emailed to the site owner.
+export const contactFormId = "xdeekojw";

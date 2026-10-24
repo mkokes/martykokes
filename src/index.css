@@ -28,3 +28,57 @@ body {
 .hero > div {
   flex: 1 1 320px;
 }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-inline: 16px;
+}
+
+.site-logo {
+  white-space: nowrap;
+}
+
+.nav-mobile {
+  display: none;
+  margin-left: auto;
+}
+
+@media (max-width: 767px) {
+  .nav-desktop {
+    display: none !important;
+  }
+
+  .nav-mobile {
+    display: inline-flex;
+  }
+}
+
+.site-footer {
+  text-align: center;
+}
+
+.page-fade {
+  animation: page-fade-in 200ms ease-out;
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-fade {
+    animation: none;
+  }
+}

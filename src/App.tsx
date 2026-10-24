@@ -1,10 +1,12 @@
-import { ConfigProvider, Layout, theme } from "antd";
+import { ConfigProvider, theme } from "antd";
 import { useEffect, useState } from "react";
-import Hero from "./components/Hero";
-import Experience from "./components/Experience";
-import Skills from "./components/Skills";
-import Education from "./components/Education";
-import Interests from "./components/Interests";
+import { Route, Routes } from "react-router-dom";
+import SiteLayout from "./components/SiteLayout";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import ExperiencePage from "./pages/Experience";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 
 function usePrefersDark() {
   const query = "(prefers-color-scheme: dark)";
@@ -22,22 +24,15 @@ export default function App() {
   const dark = usePrefersDark();
   return (
     <ConfigProvider theme={{ algorithm: dark ? theme.darkAlgorithm : theme.defaultAlgorithm }}>
-      <AppBody />
+      <Routes>
+        <Route element={<SiteLayout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="experience" element={<ExperiencePage />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </ConfigProvider>
-  );
-}
-
-function AppBody() {
-  const { token } = theme.useToken();
-  return (
-    <Layout style={{ minHeight: "100vh", background: token.colorBgLayout }}>
-      <Layout.Content className="page">
-        <Hero />
-        <Experience />
-        <Skills />
-        <Education />
-        <Interests />
-      </Layout.Content>
-    </Layout>
   );
 }
