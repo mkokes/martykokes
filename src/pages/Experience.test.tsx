@@ -29,7 +29,10 @@ describe("Experience page", () => {
     render(<ExperiencePage />);
     const section = screen.getByRole("region", { name: "Education" });
     for (const e of education) {
-      expect(within(section).getByText(`${e.school} (${e.years})`)).toBeInTheDocument();
+      expect(
+        within(section).getByRole("heading", { level: 4, name: e.school }),
+      ).toBeInTheDocument();
+      expect(within(section).getByText(e.years)).toBeInTheDocument();
       expect(within(section).getByText(e.detail)).toBeInTheDocument();
     }
   });
