@@ -42,13 +42,7 @@ export default function ContactForm() {
     : [];
 
   return (
-    <Form
-      form={form}
-      layout="vertical"
-      onFinish={onFinish}
-      requiredMark={false}
-      style={{ maxWidth: 560 }}
-    >
+    <Form form={form} layout="vertical" onFinish={onFinish} requiredMark={false}>
       <Form.Item
         name="name"
         label="Name"
@@ -92,7 +86,14 @@ export default function ContactForm() {
       {errors.length > 0 && (
         <Alert type="error" showIcon message={errors.join(" ")} style={{ marginBottom: 16 }} />
       )}
-      <Button type="primary" htmlType="submit" loading={state.submitting}>
+      <Button
+        type="primary"
+        htmlType="submit"
+        size="large"
+        shape="round"
+        block
+        loading={state.submitting}
+      >
         Send message
       </Button>
     </Form>

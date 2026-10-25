@@ -17,13 +17,19 @@ const icons: Record<SocialLink["icon"], ReactNode> = {
   mail: <MailOutlined />,
 };
 
-export default function SocialLinks({ iconOnly = false }: { iconOnly?: boolean }) {
+interface Props {
+  iconOnly?: boolean;
+  vertical?: boolean;
+}
+
+export default function SocialLinks({ iconOnly = false, vertical = false }: Props) {
   return (
-    <Space wrap className="no-print">
+    <Space wrap={!vertical} vertical={vertical} align="start" className="no-print">
       {socialLinks.map((l) => (
         <Button
           key={l.label}
           type={iconOnly ? "text" : "default"}
+          shape={iconOnly ? "circle" : "round"}
           icon={icons[l.icon]}
           href={l.url}
           target="_blank"

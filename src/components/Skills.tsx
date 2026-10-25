@@ -1,4 +1,4 @@
-import { Tag, Typography } from "antd";
+import { Typography } from "antd";
 import { skills } from "../data/skills";
 
 export default function Skills() {
@@ -7,16 +7,20 @@ export default function Skills() {
       <Typography.Title level={2} id="skills">
         Skills
       </Typography.Title>
-      {Object.entries(skills).map(([group, items]) => (
-        <div key={group} style={{ marginBottom: 12 }}>
-          <Typography.Text strong>{group}</Typography.Text>
-          <div style={{ marginTop: 4 }}>
-            {items.map((s) => (
-              <Tag key={s}>{s}</Tag>
-            ))}
+      <div className="skill-groups">
+        {Object.entries(skills).map(([group, items]) => (
+          <div key={group} className="skill-group">
+            <Typography.Text className="skill-group-label">{group}</Typography.Text>
+            <ul className="pills">
+              {items.map((s) => (
+                <li key={s} className="pill">
+                  {s}
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </section>
   );
 }

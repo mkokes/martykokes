@@ -11,19 +11,21 @@ export default function Experience() {
         items={experience.map((job) => ({
           key: `${job.company}-${job.start}`,
           content: (
-            <>
-              <Typography.Title level={4} style={{ margin: 0 }}>
-                {job.title}, {job.company}
-              </Typography.Title>
-              <Typography.Text type="secondary">
-                {job.start} – {job.end}
-              </Typography.Text>
-              <ul>
+            <div className="entry-card">
+              <div className="entry-head">
+                <Typography.Title level={4} style={{ margin: 0 }}>
+                  {job.title}, {job.company}
+                </Typography.Title>
+                <Typography.Text type="secondary" className="entry-dates">
+                  {job.start} – {job.end}
+                </Typography.Text>
+              </div>
+              <ul className="entry-highlights">
                 {job.highlights.map((h) => (
                   <li key={h}>{h}</li>
                 ))}
               </ul>
-            </>
+            </div>
           ),
         }))}
       />

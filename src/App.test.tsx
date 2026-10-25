@@ -1,4 +1,4 @@
-import { render, screen, waitFor, within } from "@testing-library/react";
+import { act, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import App from "./App";
@@ -66,9 +66,27 @@ describe("App routing", () => {
 
   it("highlights the section for nested paths", () => {
     renderAt("/about/team");
-    expect(screen.getAllByRole("menuitem", { name: "About" })[0]).toHaveClass(
-      "ant-menu-item-selected",
+    expect(screen.getAllByRole("link", { name: "About" })[0]).toHaveAttribute(
+      "aria-current",
+      "page",
     );
+    expect(screen.getAllByRole("link", { name: "Home" })[0]).not.toHaveAttribute("aria-current");
+  });
+
+  it("adds a backdrop to the header once the page scrolls", () => {
+    renderAt("/");
+    const header = document.querySelector(".site-header")!;
+    expect(header).not.toHaveClass("is-scrolled");
+    act(() => {
+      window.scrollY = 100;
+      window.dispatchEvent(new Event("scroll"));
+    });
+    expect(header).toHaveClass("is-scrolled");
+    act(() => {
+      window.scrollY = 0;
+      window.dispatchEvent(new Event("scroll"));
+    });
+    expect(header).not.toHaveClass("is-scrolled");
   });
 
   it("closes the mobile menu with its close button", async () => {
