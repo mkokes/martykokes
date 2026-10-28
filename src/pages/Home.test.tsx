@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { profile, socialLinks } from "../data/profile";
 import Home from "./Home";
@@ -22,9 +22,11 @@ describe("Home", () => {
   });
 
   it("links to every social profile in a new tab", () => {
-    renderHome();
+    const { container } = renderHome();
+    // Scoped to the hero: project cards further down have their own GitHub links.
+    const hero = within(container.querySelector<HTMLElement>(".hero")!);
     for (const l of socialLinks) {
-      const link = screen.getByRole("link", { name: new RegExp(l.label) });
+      const link = hero.getByRole("link", { name: new RegExp(l.label) });
       expect(link).toHaveAttribute("href", l.url);
       expect(link).toHaveAttribute("target", "_blank");
       expect(link).toHaveAttribute("rel", expect.stringContaining("noreferrer"));
@@ -38,5 +40,22 @@ describe("Home", () => {
       "/experience",
     );
     expect(screen.getByRole("link", { name: "Get in touch" })).toHaveAttribute("href", "/contact");
+  });
+
+  it("shows past projects with a link to see more", () => {
+    renderHome();
+    expect(screen.getByRole("heading", { level: 2, name: "Past projects" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /View more/ })).toHaveAttribute("href", "/projects");
+  });
+
+  it("features what I'm working on now", () => {
+    renderHome();
+    expect(
+      screen.getByRole("heading", { level: 2, name: "What I'm working on now" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /See all projects/ })).toHaveAttribute(
+      "href",
+      "/projects",
+    );
   });
 });
