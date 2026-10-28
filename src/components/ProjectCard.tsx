@@ -22,7 +22,7 @@ export default function ProjectCard({ project: p }: { project: Project }) {
       <Typography.Paragraph>{p.blurb}</Typography.Paragraph>
       <ul className="pills" aria-label={`${p.name} tech`}>
         {p.tech.map((t) => (
-          <li key={t} className="pill pill-neutral">
+          <li key={t} className="pill">
             {t}
           </li>
         ))}
