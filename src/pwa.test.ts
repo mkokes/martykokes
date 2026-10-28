@@ -32,6 +32,6 @@ describe("PWA manifest", () => {
     expect(existsSync(publicFile("apple-touch-icon.png"))).toBe(true);
     const html = readFileSync(resolve(__dirname, "../index.html"), "utf8");
     expect(html).toContain('href="/apple-touch-icon.png"');
-    expect(html).toMatch(/theme-color" content="#1C1B19" media="\(prefers-color-scheme: dark\)"/);
+    expect(html).toMatch(/theme-color" content="#242424" media="\(prefers-color-scheme: dark\)"/);
   });
 });

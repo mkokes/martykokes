@@ -1,54 +1,41 @@
-/* Keep colours in sync with the palette in theme.ts. */
+/*
+ * Styled with the mk-styleguide tokens (styleguide/tokens.css, loaded in main.tsx). Use the role
+ * variables (--color-bg, --color-text, --color-link, --color-primary...); they follow
+ * <html data-theme>. The antd theme in theme.ts mirrors the same values. Lime (--color-primary)
+ * is a fill only; text-coloured accents use --color-link.
+ */
 :root {
-  --primary: #3f6b4e;
-  --primary-tint: #e6efe8;
-  --neutral-tint: #f1ede4;
-  --bg: #faf8f3;
-  --surface: #ffffff;
-  --text: #2b2a27;
-  --text-secondary: #6b675f;
-  --border: #ece7dd;
-  --shadow: 0 1px 2px rgb(60 50 30 / 6%), 0 4px 16px rgb(60 50 30 / 6%);
-  --shadow-hover: 0 2px 4px rgb(60 50 30 / 8%), 0 10px 28px rgb(60 50 30 / 10%);
-  --font-serif: "Fraunces Variable", Georgia, serif;
-  --font-sans: "Inter Variable", system-ui, sans-serif;
+  /* Site-specific tints, built from the tokens. */
+  --accent-tint: var(--color-primary-50);
+  --neutral-tint: var(--color-surface);
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --primary: #8db89a;
-  --primary-tint: #26352b;
-  --neutral-tint: #2e2b27;
-  --bg: #1c1b19;
-  --surface: #252320;
-  --text: #ece8e1;
-  --text-secondary: #a8a39a;
-  --border: #34312c;
-  --shadow: 0 1px 2px rgb(0 0 0 / 30%);
-  --shadow-hover: 0 2px 4px rgb(0 0 0 / 35%), 0 10px 28px rgb(0 0 0 / 30%);
+  --accent-tint: color-mix(in srgb, var(--color-primary) 14%, var(--color-bg));
   color-scheme: dark;
 }
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
 }
 
 ::selection {
-  background: var(--primary-tint);
+  background: var(--accent-tint);
 }
 
 :focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--color-link);
   outline-offset: 2px;
 }
 
 /* Typography */
 
 :root :is(h1, h2, h3, h4).ant-typography {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-weight: 600;
 }
 
@@ -112,23 +99,23 @@ p.ant-typography {
 }
 
 .site-header.is-scrolled {
-  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  background: color-mix(in srgb, var(--color-bg) 80%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom-color: var(--border);
+  border-bottom-color: var(--color-border);
 }
 
 .site-logo {
   margin-right: auto;
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 600;
   white-space: nowrap;
-  color: var(--text);
+  color: var(--color-text);
 }
 
 .site-logo:hover {
-  color: var(--primary);
+  color: var(--color-link);
 }
 
 .nav-desktop {
@@ -140,7 +127,7 @@ p.ant-typography {
   position: relative;
   padding: 6px 12px;
   line-height: 1.5;
-  color: var(--text-secondary);
+  color: var(--color-text-muted);
   font-weight: 500;
   border-radius: 999px;
   transition: color 150ms;
@@ -148,7 +135,7 @@ p.ant-typography {
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--primary);
+  color: var(--color-link);
 }
 
 .nav-link.active::after {
@@ -160,7 +147,7 @@ p.ant-typography {
   height: 5px;
   margin-left: -2.5px;
   border-radius: 50%;
-  background: var(--primary);
+  background: var(--color-link);
 }
 
 .nav-drawer {
@@ -175,7 +162,7 @@ p.ant-typography {
 }
 
 .nav-drawer .nav-link.active {
-  background: var(--primary-tint);
+  background: var(--accent-tint);
 }
 
 .nav-drawer .nav-link.active::after {
@@ -192,7 +179,7 @@ p.ant-typography {
 }
 
 .theme-toggle .ant-segmented-item-selected {
-  color: var(--primary);
+  color: var(--color-link);
 }
 
 .sr-only {
@@ -219,7 +206,7 @@ p.ant-typography {
 .site-footer {
   margin-top: 32px;
   text-align: center;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--color-border);
 }
 
 /* Home hero */
@@ -257,8 +244,8 @@ p.ant-typography {
   inset: 0;
   transform: translate(14px, 14px);
   border-radius: 50%;
-  background: var(--primary);
-  opacity: 0.18;
+  background: var(--color-primary);
+  opacity: 0.35;
 }
 
 .hero-photo img {
@@ -269,16 +256,16 @@ p.ant-typography {
   object-fit: cover;
   border-radius: 50%;
   box-shadow:
-    0 0 0 4px var(--bg),
-    0 0 0 7px var(--primary);
+    0 0 0 4px var(--color-bg),
+    0 0 0 7px var(--color-primary);
 }
 
 .hero-greeting {
   margin: 0 0 4px;
-  color: var(--primary);
-  font-family: var(--font-serif);
+  color: var(--color-link);
+  font-family: var(--font-heading);
   font-size: 1.25rem;
-  font-style: italic;
+  font-weight: 600;
 }
 
 .hero-intro {
@@ -305,8 +292,8 @@ p.ant-typography {
 /* Cards */
 
 .soft-card.ant-card {
-  border-color: var(--border);
-  box-shadow: var(--shadow);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-sm);
 }
 
 .lift {
@@ -317,7 +304,7 @@ p.ant-typography {
 
 .lift:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--shadow-md);
 }
 
 .icon-badge {
@@ -327,8 +314,8 @@ p.ant-typography {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--primary-tint);
-  color: var(--primary);
+  background: var(--accent-tint);
+  color: var(--color-link);
   font-size: 20px;
 }
 
@@ -342,15 +329,15 @@ p.ant-typography {
 
 .skill-group {
   padding: 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 16px;
 }
 
 .skill-group-label.ant-typography {
   display: block;
   margin-bottom: 10px;
-  color: var(--text-secondary);
+  color: var(--color-text-muted);
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -369,15 +356,15 @@ p.ant-typography {
 .pill {
   padding: 4px 12px;
   border-radius: 999px;
-  background: var(--primary-tint);
-  color: var(--primary);
+  background: var(--accent-tint);
+  color: var(--color-link);
   font-size: 0.875rem;
   font-weight: 500;
 }
 
 .pill-neutral {
   background: var(--neutral-tint);
-  color: var(--text);
+  color: var(--color-text);
 }
 
 /* Projects */
@@ -396,7 +383,7 @@ p.ant-typography {
   aspect-ratio: 8 / 5;
   object-fit: cover;
   object-position: top;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .project-card .ant-card-body {
@@ -414,7 +401,7 @@ p.ant-typography {
 }
 
 .project-links a {
-  color: var(--primary);
+  color: var(--color-link);
   font-weight: 500;
 }
 
@@ -425,7 +412,7 @@ p.ant-typography {
 .now-status {
   margin-left: 8px;
   padding: 2px 10px;
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   font-size: 0.75rem;
   vertical-align: middle;
 }
@@ -466,7 +453,7 @@ p.ant-typography {
 }
 
 .now-done {
-  color: var(--primary);
+  color: var(--color-link);
 }
 
 .now-todo {
@@ -474,7 +461,7 @@ p.ant-typography {
   width: 12px;
   height: 12px;
   margin-inline: 1px;
-  border: 2px solid var(--text-secondary);
+  border: 2px solid var(--color-text-muted);
   border-radius: 50%;
   vertical-align: -1px;
   box-sizing: border-box;
@@ -493,10 +480,10 @@ p.ant-typography {
 
 .entry-card {
   padding: 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 16px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
 }
 
 .entry-head {
@@ -523,7 +510,7 @@ p.ant-typography {
 }
 
 .entry-highlights li::marker {
-  color: var(--primary);
+  color: var(--color-link);
 }
 
 /* Contact */

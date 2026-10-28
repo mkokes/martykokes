@@ -1,5 +1,7 @@
 # Visual refresh spec
 
+> **Superseded (October 2026):** the site now follows the shared mk-styleguide design system, vendored in [styleguide/](../styleguide/STYLEGUIDE.md). That means lime and greys instead of sage and warm neutrals, Poppins headings instead of Fraunces, and pure white and charcoal backgrounds. This spec's layout and component decisions still describe the page structure. Its palette, typography and colour choices no longer apply.
+
 ## Goal
 
 Move the site off the stock Ant Design look toward a **warm, personal** feel that works as a general personal hub. Keep antd, but theme it heavily through `ConfigProvider` tokens plus custom CSS. Content and routes stay the same.
