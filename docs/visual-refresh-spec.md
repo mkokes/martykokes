@@ -6,15 +6,15 @@ Move the site off the stock Ant Design look toward a **warm, personal** feel tha
 
 ## Design decisions
 
-| Area        | Decision                                   |
-| ----------- | ------------------------------------------ |
-| Personality | Warm & personal                            |
-| Framework   | Keep antd, theme heavily (tokens + CSS)    |
-| Accent      | Forest / sage green                        |
-| Type        | Serif headings + sans body                 |
-| Background  | Warm neutrals, not pure white/black        |
-| Theme       | System default + manual toggle, remembered |
-| Motion      | Subtle; respects `prefers-reduced-motion`  |
+| Area        | Decision                                  |
+| ----------- | ----------------------------------------- |
+| Personality | Warm & personal                           |
+| Framework   | Keep antd, theme heavily (tokens + CSS)   |
+| Accent      | Forest / sage green                       |
+| Type        | Serif headings + sans body                |
+| Background  | Warm neutrals, not pure white/black       |
+| Theme       | Light / System / Dark, defaults to System |
+| Motion      | Subtle; respects `prefers-reduced-motion` |
 
 ## 1. Design tokens
 
@@ -46,10 +46,10 @@ Text/primary pairs must meet WCAG AA (4.5:1) against their background, so verify
 
 - Add a `useThemeMode` hook with a `"light" | "dark" | "system"` preference stored in `localStorage` (wrapped in try/catch). Default to `"system"`.
 - Resolved mode drives the antd algorithm and sets `data-theme` on `<html>`.
-- Header gets a sun/moon icon button (`aria-label="Switch to dark/light theme"`). It cycles light ↔ dark; system stays the default until the user clicks.
+- Header gets an antd `Segmented` control (`aria-label="Theme"`) with Light (sun), System (desktop) and Dark (moon) options. Picking Light or Dark stores that choice; picking System clears it so the OS preference applies again.
 - Set the theme before React mounts (a small inline script in `index.html`) so the page doesn't flash the wrong theme on load.
 - Update `theme-color` meta / PWA manifest colors to the new backgrounds.
-- Extend `App.theme.test.tsx` to cover the toggle and persistence.
+- Extend `App.theme.test.tsx` to cover the default, each choice, persistence, and returning to System.
 
 ## 4. Header
 
@@ -57,7 +57,7 @@ Text/primary pairs must meet WCAG AA (4.5:1) against their background, so verify
 - After scrolling more than 8px, add the `.is-scrolled` class: translucent background (`color-mix` of bg at ~80%), `backdrop-filter: blur(12px)`, and a hairline bottom border.
 - Name/logo set in Fraunces.
 - Desktop nav: plain text links rather than antd's underlined Menu style. The active link gets a sage color and a small dot or underline beneath it.
-- Mobile Drawer stays, but gets the same theming. The theme toggle sits beside the hamburger.
+- Mobile Drawer stays, but gets the same theming. The theme control sits beside the hamburger.
 
 ## 5. Home: bigger hero
 
@@ -117,6 +117,6 @@ Text/primary pairs must meet WCAG AA (4.5:1) against their background, so verify
 ## Acceptance
 
 - Every page renders correctly in light and dark mode, at 375px and at 1280px.
-- The theme toggle persists across reloads, and the page doesn't flash the wrong theme on load.
+- The theme choice persists across reloads, and the page doesn't flash the wrong theme on load.
 - AA contrast for body text, secondary text, and primary buttons in both themes.
 - `npm run lint`, `npm run format:check`, `npm test`, and `npm run build` all pass. Tests are updated where markup changed.

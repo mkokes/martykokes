@@ -1,4 +1,5 @@
 import casserollers from "../assets/projects/casserollers.webp";
+import fretomaton from "../assets/projects/fretomaton.webp";
 import hexcalculator from "../assets/projects/hexcalculator.webp";
 import marriage from "../assets/projects/marriage.webp";
 import martysgarage from "../assets/projects/martysgarage.webp";
@@ -60,6 +61,15 @@ export const projects: Project[] = [
     url: "https://casserollers.com",
     repo: "https://github.com/mkokes/casserollers",
     image: casserollers,
+  },
+  {
+    name: "Fretomaton",
+    blurb:
+      "Printable fretboard templates for the guitars and ukuleles I build. Pick an instrument and scale length and it lays out every fret slot at true 1:1 scale, with bridge compensation for your string gauges. Works offline once installed.",
+    tech: ["React", "TypeScript", "Tailwind CSS", "DaisyUI", "SVG", "PWA"],
+    url: "https://mkokes.github.io/Fretomaton/",
+    repo: "https://github.com/mkokes/Fretomaton",
+    image: fretomaton,
   },
   {
     name: "Hexagon Tabletop Calculator",

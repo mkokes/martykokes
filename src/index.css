@@ -186,6 +186,24 @@ p.ant-typography {
   display: none;
 }
 
+.theme-toggle {
+  margin-left: 8px;
+  background: var(--neutral-tint);
+}
+
+.theme-toggle .ant-segmented-item-selected {
+  color: var(--primary);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 @media (max-width: 767px) {
   .nav-desktop {
     display: none !important;
@@ -412,21 +430,10 @@ p.ant-typography {
   vertical-align: middle;
 }
 
-.section-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4px 16px;
-}
-
 .section-more {
-  color: var(--primary);
-  font-weight: 500;
-}
-
-.section-more:hover {
-  text-decoration: underline;
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
 }
 
 .now-head {

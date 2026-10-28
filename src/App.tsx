@@ -8,7 +8,7 @@ import ExperiencePage from "./pages/Experience";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Projects from "./pages/Projects";
-import { THEME_KEY, themeConfig, type Mode } from "./theme";
+import { THEME_KEY, themeConfig, type Mode, type ThemePref } from "./theme";
 
 function usePrefersDark() {
   const query = "(prefers-color-scheme: dark)";
@@ -22,44 +22,44 @@ function usePrefersDark() {
   return dark;
 }
 
-function readStoredMode(): Mode | null {
+function readStoredPref(): ThemePref {
   try {
     const v = localStorage.getItem(THEME_KEY);
-    return v === "light" || v === "dark" ? v : null;
+    return v === "light" || v === "dark" ? v : "system";
   } catch {
-    return null;
+    return "system";
   }
 }
 
-// The system preference applies until the visitor picks a theme, which is then remembered.
+// Follows the system preference unless the visitor picks light or dark, which is then remembered.
 function useThemeMode() {
   const systemDark = usePrefersDark();
-  const [stored, setStored] = useState(readStoredMode);
-  const mode: Mode = stored ?? (systemDark ? "dark" : "light");
+  const [pref, setPrefState] = useState(readStoredPref);
+  const mode: Mode = pref === "system" ? (systemDark ? "dark" : "light") : pref;
 
   useEffect(() => {
     document.documentElement.dataset.theme = mode;
   }, [mode]);
 
-  function toggle() {
-    const next: Mode = mode === "dark" ? "light" : "dark";
-    setStored(next);
+  function setPref(next: ThemePref) {
+    setPrefState(next);
     try {
-      localStorage.setItem(THEME_KEY, next);
+      if (next === "system") localStorage.removeItem(THEME_KEY);
+      else localStorage.setItem(THEME_KEY, next);
     } catch {
       // Storage can be unavailable (private mode); the choice just won't persist.
     }
   }
 
-  return [mode, toggle] as const;
+  return { mode, pref, setPref };
 }
 
 export default function App() {
-  const [mode, toggleMode] = useThemeMode();
+  const { mode, pref, setPref } = useThemeMode();
   return (
     <ConfigProvider theme={themeConfig(mode)}>
       <Routes>
-        <Route element={<SiteLayout mode={mode} onToggleMode={toggleMode} />}>
+        <Route element={<SiteLayout themePref={pref} onThemePrefChange={setPref} />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="experience" element={<ExperiencePage />} />

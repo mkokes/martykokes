@@ -1,6 +1,7 @@
 import { theme, type ThemeConfig } from "antd";
 
 export type Mode = "light" | "dark";
+export type ThemePref = Mode | "system";
 
 // Also read by the inline script in index.html, which sets the theme before first paint.
 export const THEME_KEY = "theme";
