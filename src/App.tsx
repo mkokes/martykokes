@@ -8,7 +8,7 @@ import ExperiencePage from "./pages/Experience";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Projects from "./pages/Projects";
-import { THEME_KEY, themeConfig, type Mode, type ThemePref } from "./theme";
+import { THEME_KEY, palette, themeConfig, type Mode, type ThemePref } from "./theme";
 
 function usePrefersDark() {
   const query = "(prefers-color-scheme: dark)";
@@ -39,6 +39,8 @@ function useThemeMode() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = mode;
+    // Browser chrome (mobile address bar, installed-app title bar) follows the chosen mode.
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", palette[mode].bg);
   }, [mode]);
 
   function setPref(next: ThemePref) {

@@ -40,6 +40,21 @@ describe("theme", () => {
     vi.restoreAllMocks();
   });
 
+  it("keeps the theme-color meta tag in step with the chosen mode", async () => {
+    const meta = document.createElement("meta");
+    meta.name = "theme-color";
+    meta.content = "#FFFFFF";
+    document.head.append(meta);
+    const { unmount } = renderApp();
+    expect(meta.content).toBe("#FFFFFF");
+    await pick("Dark");
+    expect(meta.content).toBe("#242424");
+    await pick("Light");
+    expect(meta.content).toBe("#FFFFFF");
+    unmount();
+    meta.remove();
+  });
+
   it("follows the system colour scheme and cleans up its listener", () => {
     const mm = mockMatchMedia(true);
     const { unmount } = renderApp();
