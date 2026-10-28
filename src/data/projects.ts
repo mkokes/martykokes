@@ -3,6 +3,7 @@ import fretomaton from "../assets/projects/fretomaton.webp";
 import hexcalculator from "../assets/projects/hexcalculator.webp";
 import marriage from "../assets/projects/marriage.webp";
 import martysgarage from "../assets/projects/martysgarage.webp";
+import styleguideGenerator from "../assets/projects/styleguide-generator.webp";
 import toolbox from "../assets/projects/toolbox.webp";
 import wouldbymarty from "../assets/projects/wouldbymarty.webp";
 
@@ -43,6 +44,15 @@ export const projects: Project[] = [
     url: "https://cards.martykokes.com",
     repo: "https://github.com/mkokes/marriage",
     image: marriage,
+  },
+  {
+    name: "Styleguide Generator",
+    blurb:
+      "A step-by-step wizard for a brand's colors, type, spacing and rules. It checks every color pairing for contrast, previews the result live, and writes it all out as a STYLEGUIDE.md for AI coding agents plus CSS, Tailwind and design-token files. It's what styles this site.",
+    tech: ["React", "TypeScript", "Ant Design", "OKLCH", "Design tokens", "PWA"],
+    url: "https://mkokes.github.io/styleguide-generator/",
+    repo: "https://github.com/mkokes/styleguide-generator",
+    image: styleguideGenerator,
   },
   {
     name: "Moped Toolbox",
