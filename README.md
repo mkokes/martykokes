@@ -49,3 +49,9 @@ All copy lives in [`src/data/`](src/data/): profile and social links, experience
 ## Contributing
 
 Run `npm run lint`, `npm run format:check` and `npm run test:coverage` before pushing (the pre-push hook does this too), then open a pull request against `master`. Merges to `master` deploy automatically. See [AGENTS.md](AGENTS.md) for conventions and [docs/](docs/) for the design spec.
+
+## License
+
+Copyright (C) 2018-2026 Marty Kokes
+
+Licensed under the GNU General Public License v3.0 or later. See [LICENSE](LICENSE).
