@@ -28,10 +28,12 @@ describe("PWA manifest", () => {
     }
   });
 
-  it("provides an iOS home-screen icon and a dark-mode theme colour", () => {
+  it("provides an iOS home-screen icon and a theme colour that follows the chosen mode", () => {
     expect(existsSync(publicFile("apple-touch-icon.png"))).toBe(true);
     const html = readFileSync(resolve(__dirname, "../index.html"), "utf8");
     expect(html).toContain('href="/apple-touch-icon.png"');
-    expect(html).toMatch(/theme-color" content="#1C1B19" media="\(prefers-color-scheme: dark\)"/);
+    expect(html).toContain('<meta name="theme-color" content="#FFFFFF" />');
+    // The no-flash script sets it from the resolved mode before first paint.
+    expect(html).toContain('t === "dark" ? "#242424" : "#FFFFFF"');
   });
 });

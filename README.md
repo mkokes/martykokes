@@ -2,7 +2,7 @@
 
 Personal site and resume of Marty Kokes, senior frontend engineer.
 
-A small React single-page app with my background, work history, side projects and a contact form. It's themed in a warm sage palette, works in light and dark mode, and installs as a PWA. It is live at [martykokes.com](https://martykokes.com).
+A small React single-page app with my background, work history, side projects and a contact form. It follows the shared [mk-styleguide](https://github.com/mkokes/mk-styleguide) design system (neon lime, greys, Poppins and Inter), works in light and dark mode, and installs as a PWA. It is live at [martykokes.com](https://martykokes.com).
 
 ## Features
 

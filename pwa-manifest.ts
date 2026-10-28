@@ -6,8 +6,8 @@ export const manifest: Partial<ManifestOptions> = {
   short_name: "Marty Kokes",
   description: "Resume and personal projects of Marty Kokes",
   categories: ["business", "portfolio", "productivity"],
-  theme_color: "#3F6B4E",
-  background_color: "#FAF8F3",
+  theme_color: "#242424",
+  background_color: "#FFFFFF",
   display: "standalone",
   orientation: "any",
   icons: [
