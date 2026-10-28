@@ -7,6 +7,7 @@ import Contact from "./pages/Contact";
 import ExperiencePage from "./pages/Experience";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import Projects from "./pages/Projects";
 import { THEME_KEY, themeConfig, type Mode } from "./theme";
 
 function usePrefersDark() {
@@ -62,6 +63,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="experience" element={<ExperiencePage />} />
+          <Route path="projects" element={<Projects />} />
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>

@@ -36,6 +36,18 @@ describe("App routing", () => {
     expect(screen.getByRole("heading", { level: 2, name: "Education" })).toBeInTheDocument();
   });
 
+  it("shows the projects page", () => {
+    renderAt("/projects");
+    expect(screen.getByRole("heading", { level: 1, name: "Projects" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 3, name: "Marriage" })).toBeInTheDocument();
+  });
+
+  it("navigates to projects from the header", async () => {
+    renderAt("/");
+    await userEvent.click(screen.getAllByRole("link", { name: "Projects" })[0]);
+    expect(await screen.findByRole("heading", { level: 1, name: "Projects" })).toBeInTheDocument();
+  });
+
   it("shows the contact page with the message form", () => {
     renderAt("/contact");
     expect(screen.getByRole("heading", { level: 1, name: "Get in touch" })).toBeInTheDocument();
