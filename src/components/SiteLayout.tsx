@@ -1,9 +1,9 @@
-import { Button, Drawer, Layout, Typography } from "antd";
-import { MenuOutlined, MoonOutlined, SunOutlined } from "@ant-design/icons";
+import { Button, Drawer, Layout, Segmented, Typography } from "antd";
+import { DesktopOutlined, MenuOutlined, MoonOutlined, SunOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { profile } from "../data/profile";
-import type { Mode } from "../theme";
+import type { ThemePref } from "../theme";
 import SocialLinks from "./SocialLinks";
 
 export const navItems = [
@@ -16,6 +16,17 @@ export const navItems = [
 
 const year = new Date().getFullYear();
 
+const themeOptions = [
+  { value: "light", label: "Light", icon: <SunOutlined aria-hidden /> },
+  { value: "system", label: "System", icon: <DesktopOutlined aria-hidden /> },
+  { value: "dark", label: "Dark", icon: <MoonOutlined aria-hidden /> },
+].map((o) => ({
+  value: o.value as ThemePref,
+  title: `${o.label} theme`,
+  icon: o.icon,
+  label: <span className="sr-only">{o.label}</span>,
+}));
+
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
   return navItems.map((i) => (
     <NavLink key={i.to} to={i.to} end={i.to === "/"} className="nav-link" onClick={onNavigate}>
@@ -25,11 +36,11 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
 }
 
 interface Props {
-  mode: Mode;
-  onToggleMode: () => void;
+  themePref: ThemePref;
+  onThemePrefChange: (pref: ThemePref) => void;
 }
 
-export default function SiteLayout({ mode, onToggleMode }: Props) {
+export default function SiteLayout({ themePref, onThemePrefChange }: Props) {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -45,8 +56,6 @@ export default function SiteLayout({ mode, onToggleMode }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const nextMode = mode === "dark" ? "light" : "dark";
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Layout.Header className={`site-header no-print${scrolled ? " is-scrolled" : ""}`}>
@@ -56,12 +65,14 @@ export default function SiteLayout({ mode, onToggleMode }: Props) {
         <nav className="nav-desktop" aria-label="Main">
           <NavLinks />
         </nav>
-        <Button
-          type="text"
-          shape="circle"
-          icon={mode === "dark" ? <SunOutlined /> : <MoonOutlined />}
-          aria-label={`Switch to ${nextMode} theme`}
-          onClick={onToggleMode}
+        <Segmented
+          className="theme-toggle"
+          size="small"
+          shape="round"
+          aria-label="Theme"
+          options={themeOptions}
+          value={themePref}
+          onChange={onThemePrefChange}
         />
         <Button
           className="nav-mobile"

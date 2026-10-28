@@ -30,6 +30,10 @@ function renderApp() {
 
 const theme = () => document.documentElement.dataset.theme;
 
+// antd hides the radio input itself from pointer events, so click its label like a visitor would.
+const pick = (name: string) =>
+  userEvent.click(screen.getByRole("radio", { name }).closest("label")!);
+
 describe("theme", () => {
   afterEach(() => {
     localStorage.clear();
@@ -52,29 +56,44 @@ describe("theme", () => {
     mm.restore();
   });
 
-  it("toggles the theme and remembers the choice", async () => {
+  it("defaults to system and remembers an explicit choice", async () => {
     const { unmount } = renderApp();
+    expect(screen.getByRole("radio", { name: "System" })).toBeChecked();
     expect(theme()).toBe("light");
 
-    await userEvent.click(screen.getByRole("button", { name: "Switch to dark theme" }));
+    await pick("Dark");
     expect(theme()).toBe("dark");
     expect(localStorage.getItem(THEME_KEY)).toBe("dark");
 
     unmount();
     renderApp();
+    expect(screen.getByRole("radio", { name: "Dark" })).toBeChecked();
     expect(theme()).toBe("dark");
-    await userEvent.click(screen.getByRole("button", { name: "Switch to light theme" }));
+    await pick("Light");
     expect(theme()).toBe("light");
     expect(localStorage.getItem(THEME_KEY)).toBe("light");
+  });
+
+  it("goes back to following the system when System is picked", async () => {
+    localStorage.setItem(THEME_KEY, "light");
+    const mm = mockMatchMedia(true);
+    renderApp();
+    expect(theme()).toBe("light");
+
+    await pick("System");
+    expect(theme()).toBe("dark");
+    expect(localStorage.getItem(THEME_KEY)).toBeNull();
+    mm.restore();
   });
 
   it("ignores unknown stored values", () => {
     localStorage.setItem(THEME_KEY, "purple");
     renderApp();
+    expect(screen.getByRole("radio", { name: "System" })).toBeChecked();
     expect(theme()).toBe("light");
   });
 
-  it("still toggles when storage is unavailable", async () => {
+  it("still switches when storage is unavailable", async () => {
     vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
       throw new Error("blocked");
     });
@@ -83,7 +102,7 @@ describe("theme", () => {
     });
     renderApp();
     expect(theme()).toBe("light");
-    await userEvent.click(screen.getByRole("button", { name: "Switch to dark theme" }));
+    await pick("Dark");
     expect(theme()).toBe("dark");
   });
 });
