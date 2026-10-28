@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-28
+
 ### Added
 
 - React + Ant Design resume site, replacing the old WordPress site.
@@ -27,3 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - The "My sites" section is no longer shown.
+
+[Unreleased]: https://github.com/mkokes/martykokes/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/mkokes/martykokes/releases/tag/v1.0.0
