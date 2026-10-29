@@ -1,3 +1,4 @@
 {
+  "endOfLine": "lf",
   "ignorePatterns": ["dist", "dev-dist", "coverage", "package-lock.json", "styleguide/**"]
 }
