@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - GPL-3.0-or-later license (`LICENSE`).
+- Tours project card, linking to the 360° photo albums at tours.martykokes.com.
 
 ## [1.0.0] - 2026-10-28
 
