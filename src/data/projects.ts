@@ -5,6 +5,7 @@ import marriage from "../assets/projects/marriage.webp";
 import martysgarage from "../assets/projects/martysgarage.webp";
 import styleguideGenerator from "../assets/projects/styleguide-generator.webp";
 import toolbox from "../assets/projects/toolbox.webp";
+import tours from "../assets/projects/tours.webp";
 import wouldbymarty from "../assets/projects/wouldbymarty.webp";
 
 export interface Project {
@@ -53,6 +54,15 @@ export const projects: Project[] = [
     url: "https://mkokes.github.io/styleguide-generator/",
     repo: "https://github.com/mkokes/styleguide-generator",
     image: styleguideGenerator,
+  },
+  {
+    name: "Tours",
+    blurb:
+      "360° photo albums of places I've been. Drag to look around, follow arrows from one panorama to the next, and see where each was taken on a small map. Drop photos straight off the camera into a folder and the build resizes them and strips their GPS data.",
+    tech: ["TypeScript", "Photo Sphere Viewer", "Three.js", "Leaflet", "Vite", "PWA"],
+    url: "https://tours.martykokes.com",
+    repo: "https://github.com/mkokes/tours",
+    image: tours,
   },
   {
     name: "Moped Toolbox",
