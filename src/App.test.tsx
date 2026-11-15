@@ -76,6 +76,20 @@ describe("App routing", () => {
     await waitFor(() => expect(document.querySelector(".ant-drawer-open")).toBeNull());
   });
 
+  it("links to the tours site from the header and the mobile menu", async () => {
+    renderAt("/");
+    const desktop = screen.getByRole("navigation", { name: "Main" });
+    const tours = within(desktop).getByRole("link", { name: "Tours" });
+    expect(tours).toHaveAttribute("href", "https://tours.martykokes.com/");
+    expect(tours).not.toHaveAttribute("target");
+    await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    const drawer = await screen.findByRole("dialog");
+    expect(within(drawer).getByRole("link", { name: "Tours" })).toHaveAttribute(
+      "href",
+      "https://tours.martykokes.com/",
+    );
+  });
+
   it("highlights the section for nested paths", () => {
     renderAt("/about/team");
     expect(screen.getAllByRole("link", { name: "About" })[0]).toHaveAttribute(

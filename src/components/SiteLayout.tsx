@@ -6,11 +6,13 @@ import { profile } from "../data/profile";
 import type { ThemePref } from "../theme";
 import SocialLinks from "./SocialLinks";
 
+// Full URLs point at sibling sites (e.g. tours.martykokes.com) that share this header.
 export const navItems = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
   { to: "/experience", label: "Experience" },
   { to: "/projects", label: "Projects" },
+  { to: "https://tours.martykokes.com/", label: "Tours" },
   { to: "/contact", label: "Contact" },
 ];
 
@@ -28,11 +30,17 @@ const themeOptions = [
 }));
 
 function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
-  return navItems.map((i) => (
-    <NavLink key={i.to} to={i.to} end={i.to === "/"} className="nav-link" onClick={onNavigate}>
-      {i.label}
-    </NavLink>
-  ));
+  return navItems.map((i) =>
+    i.to.startsWith("https://") ? (
+      <a key={i.to} href={i.to} className="nav-link">
+        {i.label}
+      </a>
+    ) : (
+      <NavLink key={i.to} to={i.to} end={i.to === "/"} className="nav-link" onClick={onNavigate}>
+        {i.label}
+      </NavLink>
+    ),
+  );
 }
 
 interface Props {
