@@ -49,6 +49,7 @@ The Husky pre-push hook runs `lint`, `format:check` and `test:coverage`. CI (`.g
   - antd's `colorPrimary` is the link colour. Primary buttons are overridden to lime pills with dark text.
 - **Theme:** the visitor's preference is `"light" | "system" | "dark"` (default `"system"`). Light/dark are stored in `localStorage` under `THEME_KEY`; choosing system removes the key. The resolved mode is written to `<html data-theme>`. The inline script in `index.html` reads the same key, so keep them in step if the storage format changes.
 - **Tests** sit next to the code (`*.test.tsx`) and use Testing Library with role/name queries. Coverage must stay at 100% for statements, branches, functions and lines, or CI and pre-push fail.
+- **Navigation** is shared with tours.martykokes.com: keep `navItems` in `src/components/SiteLayout.tsx` in step with `navItems` in the tours repo's `src/layout.ts`. Items whose `to` is a full `https://` URL render as plain same-tab links instead of router links.
 - Wrap `localStorage` access in try/catch; it throws in some private modes.
 - Formatting is oxfmt; don't hand-format against it.
 
