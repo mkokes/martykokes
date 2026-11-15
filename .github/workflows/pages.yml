@@ -11,9 +11,11 @@ permissions:
   pages: write
   id-token: write
 
+# One queue per branch: PR runs cancel their own superseded runs but never a
+# master deploy, and master deploys queue instead of cancelling each other.
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   build:
