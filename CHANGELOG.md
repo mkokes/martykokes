@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GPL-3.0-or-later license (`LICENSE`).
 - Tours project card, linking to the 360° photo albums at tours.martykokes.com.
 
+### Changed
+
+- New home page intro: "Developer by trade, maker by nature", covering software, AI, mechanical projects, electronics and woodworking.
+
 ## [1.0.0] - 2026-10-28
 
 ### Added
