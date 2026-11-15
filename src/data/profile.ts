@@ -3,7 +3,7 @@ export const profile = {
   title: "Senior Frontend Engineer",
   location: "Greater Minneapolis–St. Paul, MN",
   objective:
-    "Based on an extensive background in a wide variety of technologies, my interests and passion are focused on web and mobile development.",
+    "Developer by trade, maker by nature. If it can be built, I'm interested, whether that's software, AI, mechanical projects, electronics or something from the woodshop.",
 };
 
 export interface SocialLink {
