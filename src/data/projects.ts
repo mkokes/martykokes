@@ -135,11 +135,21 @@ export const now: NowProject = {
     "Cognito",
     "S3 + CloudFront",
     "Terraform",
+    "React",
+    "TypeScript",
+    "Vite",
+    "PWA",
   ],
-  done: ["Spec and data model", "API and Textract worker", "Terraform for the whole stack"],
-  next: ["Offline-friendly PWA front end", "First deploy"],
+  done: [
+    "Spec and data model",
+    "API and Textract worker",
+    "Terraform for the whole stack",
+    "Offline-friendly PWA front end",
+  ],
+  next: ["First deploy"],
   repos: [
     { label: "API", url: "https://github.com/mkokes/receiptvault-api" },
     { label: "Infrastructure", url: "https://github.com/mkokes/receiptvault-infra" },
+    { label: "Web", url: "https://github.com/mkokes/receiptvault-web" },
   ],
 };
