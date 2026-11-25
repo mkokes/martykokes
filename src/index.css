@@ -138,8 +138,7 @@ p.ant-typography {
   color: var(--color-link);
 }
 
-.nav-link.active::after {
-  content: "";
+.nav-indicator {
   position: absolute;
   left: 50%;
   bottom: -2px;
@@ -163,10 +162,6 @@ p.ant-typography {
 
 .nav-drawer .nav-link.active {
   background: var(--accent-tint);
-}
-
-.nav-drawer .nav-link.active::after {
-  display: none;
 }
 
 .nav-mobile {
@@ -376,14 +371,49 @@ p.ant-typography {
   overflow: hidden;
 }
 
-.project-card .ant-card-cover img {
+.project-morph {
+  height: 100%;
+}
+
+/* Screenshot frame; the image inside drifts with scroll (parallax), so the frame clips it. */
+.project-cover {
+  overflow: hidden;
+  aspect-ratio: 8 / 5;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-cover img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 8 / 5;
+  height: 100%;
   object-fit: cover;
   object-position: top;
-  border-bottom: 1px solid var(--color-border);
+}
+
+/* The title link's overlay makes the whole card clickable; real links and pills sit above it. */
+.project-card.ant-card {
+  position: relative;
+}
+
+.stretched-link {
+  color: inherit;
+}
+
+.stretched-link:hover {
+  color: var(--color-link);
+}
+
+.stretched-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.project-card .pills,
+.project-card .project-links {
+  position: relative;
+  z-index: 2;
 }
 
 .project-card .ant-card-body {
@@ -471,7 +501,64 @@ p.ant-typography {
   margin-top: 8px;
 }
 
+/* Project page */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  color: var(--color-link);
+  font-weight: 500;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.project-detail {
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.project-detail-body {
+  padding: 32px;
+}
+
+.project-detail-actions {
+  margin-top: 32px;
+}
+
+@media (max-width: 575px) {
+  .project-detail-body {
+    padding: 20px;
+  }
+}
+
 /* Experience & education entries */
+
+/* The drawn line runs over antd's faint rails, from the first dot to the last. */
+.timeline-track {
+  position: relative;
+}
+
+.timeline-draw {
+  position: absolute;
+  left: 4px;
+  z-index: 1;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--color-link);
+  transform-origin: top;
+}
+
+.timeline-track .ant-timeline-item-icon {
+  position: relative;
+  z-index: 2;
+}
 
 .entry-list {
   display: grid;
@@ -528,49 +615,99 @@ p.ant-typography {
   }
 }
 
-/* Motion */
+/* Motion: entrances and scroll reveals use the motion library (src/motion.ts). */
 
-.page-fade {
-  animation: page-fade-in 200ms ease-out;
+/* Outgoing and incoming pages share one grid cell, so they overlap while crossing over. */
+.page-stack {
+  display: grid;
 }
 
-@keyframes page-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+.page-view {
+  grid-area: 1 / 1;
+  min-width: 0;
 }
 
-/* Sections fade up as they scroll into view, where scroll-driven animations are supported. */
-@supports (animation-timeline: view()) {
-  .section {
-    animation: reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 0% entry 35%;
-  }
+.scroll-progress {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 3px;
+  background: var(--color-primary);
+  transform-origin: 0 50%;
 }
 
-@keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
+/* Split-text heading: words don't break mid-word; letters can rotate in 3D. */
+.split-word {
+  display: inline-block;
+  white-space: nowrap;
+  perspective: 600px;
+}
+
+.split-letter {
+  display: inline-block;
+}
+
+/* Tilt cards with a glare and a lit border that follow the cursor (InteractiveCard). */
+.tilt-stage,
+.interactive-card,
+.interactive-card-static {
+  height: 100%;
+}
+
+.tilt-stage {
+  perspective: 900px;
+}
+
+.interactive-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+}
+
+.interactive-card::before,
+.interactive-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-slow) var(--ease-standard);
+}
+
+.interactive-card::before {
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--color-primary) 16%, transparent),
+    transparent 50%
+  );
+}
+
+.interactive-card::after {
+  padding: 1.5px;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    var(--color-primary),
+    transparent 70%
+  );
+  /* Keep only a ring the width of the padding. */
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+
+.interactive-card:hover::before,
+.interactive-card:hover::after {
+  opacity: 1;
+}
+
+/* The tilt replaces the lift; keep the deeper shadow. */
+.interactive-card .lift:hover {
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-fade,
-  .section {
-    animation: none;
-  }
-
   .lift,
   .lift:hover {
     transition: none;

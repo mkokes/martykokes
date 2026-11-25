@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GPL-3.0-or-later license (`LICENSE`).
 - Tours project card, linking to the 360° photo albums at tours.martykokes.com.
 - Tours link in the header and mobile menu, pointing to tours.martykokes.com, which uses the same navigation.
+- A page for each project at `/projects/<slug>`. Clicking a project card morphs the card into its page, and Back morphs it back into place, returning you to where you were on the list.
+- Animations with [Motion](https://motion.dev): your name spells itself out letter by letter on the home page; sections reveal part by part as they scroll in; tech and skill pills pop in and wobble on hover; project and "What I do" cards tilt toward the mouse with a lime glare and lit border; project screenshots drift with scroll; the Experience timeline draws itself as you scroll; a lime bar under the header shows scroll progress; pages slide between each other; and the header's current-page dot slides between links. Visitors who prefer reduced motion get fades without movement, and tilt and parallax are off for them and on touch screens.
 
 ### Changed
 
