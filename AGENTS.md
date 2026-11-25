@@ -42,7 +42,7 @@ The Husky pre-push hook runs `lint`, `format:check` and `test:coverage`. CI (`.g
 
 ## Conventions
 
-- **Content lives in `src/data/`.** Pages and components only render it. To add a project, add an entry to `projects` in `src/data/projects.ts` (ordered most technical first; the home page shows the first three) and an 800×500 `.webp` screenshot in `src/assets/projects/`.
+- **Content lives in `src/data/`.** Pages and components only render it. To add a project, add an entry to `projects` in `src/data/projects.ts` (ordered most technical first; the home page shows the first three) and an 800×500 `.webp` screenshot in `src/assets/projects/`. Each project needs a unique `slug`, which becomes its page's URL (`/projects/<slug>`).
 - **Styling** follows the mk-styleguide guide in `styleguide/STYLEGUIDE.md`. Its tokens (`styleguide/tokens.css`) are loaded in `main.tsx`. Don't edit the vendored files; copy new versions from mk-styleguide.
   - Plain CSS in `src/index.css` uses the role variables (`--color-bg`, `--color-text`, `--color-link`, `--color-primary`...). `src/theme.ts` mirrors them as hex for antd; keep them in step.
   - Lime (`--color-primary`) is a fill only: buttons, the photo ring, the hero blob. Text-coloured accents use `--color-link`.
@@ -50,12 +50,18 @@ The Husky pre-push hook runs `lint`, `format:check` and `test:coverage`. CI (`.g
 - **Theme:** the visitor's preference is `"light" | "system" | "dark"` (default `"system"`). Light/dark are stored in `localStorage` under `THEME_KEY`; choosing system removes the key. The resolved mode is written to `<html data-theme>`. The inline script in `index.html` reads the same key, so keep them in step if the storage format changes.
 - **Tests** sit next to the code (`*.test.tsx`) and use Testing Library with role/name queries. Coverage must stay at 100% for statements, branches, functions and lines, or CI and pre-push fail.
 - **Navigation** is shared with tours.martykokes.com: keep `navItems` in `src/components/SiteLayout.tsx` in step with `navItems` in the tours repo's `src/layout.ts`. Items whose `to` is a full `https://` URL render as plain same-tab links instead of router links.
+- **Motion** uses the `motion` library (`motion/react`).
+  - Shared variants, and seconds mirrors of the styleguide duration/easing tokens, live in `src/motion.ts`; keep them in step with `styleguide/tokens.css`.
+  - Building blocks: `Section` (reveals its children in turn as it scrolls in), `CardGrid` (staggered card grid), `Pills`, `SplitText`, `InteractiveCard` (tilt + cursor spotlight).
+  - Reduced motion: `MotionConfig reducedMotion="user"` in `App.tsx` covers variant animations. Scroll-linked and pointer effects check `useMotionOk()` / `usePointerEffects()` (`src/useMotionOk.ts`) and stay still when they return false. CSS-only animation still needs its own media query.
+  - Page transitions live in `AnimatedOutlet`. Before a link click or Back/Forward swaps pages, it pins the outgoing page with `position: fixed` and sets the new scroll position, so shared `layoutId` morphs (project card ↔ project page) measure both pages in the same scroll frame. It also restores scroll per history entry. Its listeners must be added in a layout effect so they run before React Router's `popstate` listener, which re-renders synchronously.
+  - Card morph `layoutId`s are scoped by the page the card sits on (`from` on `ProjectCard`, passed to the project page in router state), so Home's and Projects' cards don't morph into each other.
 - Wrap `localStorage` access in try/catch; it throws in some private modes.
 - Formatting is oxfmt; don't hand-format against it.
 
 ## Gotchas
 
 - antd `Segmented` radios have `pointer-events: none`; in tests click the option's `<label>` (see `pick()` in `src/App.theme.test.tsx`).
-- `src/setupTests.ts` stubs `matchMedia`, `scrollTo` and `ResizeObserver` for jsdom. Theme tests replace `matchMedia` to drive the system preference.
+- `src/setupTests.ts` stubs `matchMedia`, `scrollTo`, `ResizeObserver` and `IntersectionObserver` (for motion's `whileInView`). Motion caches the reduced-motion query on first read, so tests for the still paths mock `../useMotionOk` instead of `matchMedia` for jsdom. Theme tests replace `matchMedia` to drive the system preference.
 - Deep links on GitHub Pages work because CI copies `dist/index.html` to `dist/404.html`.
 - The contact form posts to Formspree; the form id is in `src/data/profile.ts`.

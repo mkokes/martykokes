@@ -1,4 +1,5 @@
 import { ConfigProvider } from "antd";
+import { MotionConfig } from "motion/react";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import SiteLayout from "./components/SiteLayout";
@@ -7,20 +8,10 @@ import Contact from "./pages/Contact";
 import ExperiencePage from "./pages/Experience";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import ProjectDetail from "./pages/ProjectDetail";
 import Projects from "./pages/Projects";
+import { useMediaQuery } from "./useMediaQuery";
 import { THEME_KEY, palette, themeConfig, type Mode, type ThemePref } from "./theme";
-
-function usePrefersDark() {
-  const query = "(prefers-color-scheme: dark)";
-  const [dark, setDark] = useState(() => window.matchMedia(query).matches);
-  useEffect(() => {
-    const mq = window.matchMedia(query);
-    const onChange = (e: MediaQueryListEvent) => setDark(e.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
-  return dark;
-}
 
 function readStoredPref(): ThemePref {
   try {
@@ -33,7 +24,7 @@ function readStoredPref(): ThemePref {
 
 // Follows the system preference unless the visitor picks light or dark, which is then remembered.
 function useThemeMode() {
-  const systemDark = usePrefersDark();
+  const systemDark = useMediaQuery("(prefers-color-scheme: dark)");
   const [pref, setPrefState] = useState(readStoredPref);
   const mode: Mode = pref === "system" ? (systemDark ? "dark" : "light") : pref;
 
@@ -60,16 +51,20 @@ export default function App() {
   const { mode, pref, setPref } = useThemeMode();
   return (
     <ConfigProvider theme={themeConfig(mode)}>
-      <Routes>
-        <Route element={<SiteLayout themePref={pref} onThemePrefChange={setPref} />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="experience" element={<ExperiencePage />} />
-          <Route path="projects" element={<Projects />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
+      {/* Visitors who ask for reduced motion get fades without movement. */}
+      <MotionConfig reducedMotion="user">
+        <Routes>
+          <Route element={<SiteLayout themePref={pref} onThemePrefChange={setPref} />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="experience" element={<ExperiencePage />} />
+            <Route path="projects" element={<Projects />} />
+            <Route path="projects/:slug" element={<ProjectDetail />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </MotionConfig>
     </ConfigProvider>
   );
 }

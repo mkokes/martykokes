@@ -7,10 +7,12 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { now } from "../data/projects";
+import Section from "./Section";
+import Pills from "./Pills";
 
 export default function NowFeature() {
   return (
-    <section className="section" aria-labelledby="now">
+    <Section labelledBy="now">
       <Typography.Title level={2} id="now">
         What I'm working on now
       </Typography.Title>
@@ -29,13 +31,7 @@ export default function NowFeature() {
         {now.story.map((p) => (
           <Typography.Paragraph key={p}>{p}</Typography.Paragraph>
         ))}
-        <ul className="pills" aria-label={`${now.name} tech`}>
-          {now.tech.map((t) => (
-            <li key={t} className="pill">
-              {t}
-            </li>
-          ))}
-        </ul>
+        <Pills items={now.tech} label={`${now.name} tech`} />
         <div className="now-progress">
           <div>
             <Typography.Text className="skill-group-label">Done</Typography.Text>
@@ -69,6 +65,6 @@ export default function NowFeature() {
           </Link>
         </Space>
       </Card>
-    </section>
+    </Section>
   );
 }

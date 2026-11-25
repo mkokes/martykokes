@@ -1,22 +1,22 @@
-import { Button, Col, Row, Typography } from "antd";
+import { Button, Typography } from "antd";
 import { RightOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
+import CardGrid from "./CardGrid";
 import ProjectCard from "./ProjectCard";
+import Section from "./Section";
 
 export default function PastProjects() {
   return (
-    <section className="section" aria-labelledby="past-projects">
+    <Section labelledBy="past-projects">
       <Typography.Title level={2} id="past-projects">
         Past projects
       </Typography.Title>
-      <Row gutter={[16, 16]}>
-        {projects.slice(0, 3).map((p) => (
-          <Col key={p.url} xs={24} sm={12} lg={8}>
-            <ProjectCard project={p} />
-          </Col>
-        ))}
-      </Row>
+      <CardGrid
+        items={projects.slice(0, 3)}
+        getKey={(p) => p.slug}
+        render={(p) => <ProjectCard project={p} from="home" />}
+      />
       <div className="section-more">
         <Link to="/projects">
           <Button size="large" shape="round">
@@ -24,6 +24,6 @@ export default function PastProjects() {
           </Button>
         </Link>
       </div>
-    </section>
+    </Section>
   );
 }

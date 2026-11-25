@@ -1,9 +1,12 @@
-import { Card, Col, Row, Typography } from "antd";
+import { Card, Typography } from "antd";
 import { ApiOutlined, CodeOutlined, MobileOutlined, ToolOutlined } from "@ant-design/icons";
 import type { ReactNode } from "react";
 import { aboutIntro, whatIDo, type WhatIDo } from "../data/about";
 import Skills from "../components/Skills";
 import Interests from "../components/Interests";
+import Section from "../components/Section";
+import CardGrid from "../components/CardGrid";
+import InteractiveCard from "../components/InteractiveCard";
 
 const icons: Record<WhatIDo["icon"], ReactNode> = {
   code: <CodeOutlined />,
@@ -21,13 +24,17 @@ export default function About() {
           {p}
         </Typography.Paragraph>
       ))}
-      <section className="section" aria-labelledby="what-i-do">
+      <Section labelledBy="what-i-do">
         <Typography.Title level={2} id="what-i-do">
           What I do
         </Typography.Title>
-        <Row gutter={[16, 16]}>
-          {whatIDo.map((w) => (
-            <Col key={w.title} xs={24} sm={12}>
+        <CardGrid
+          items={whatIDo}
+          getKey={(w) => w.title}
+          sm={12}
+          lg={12}
+          render={(w) => (
+            <InteractiveCard>
               <Card className="soft-card lift" style={{ height: "100%" }}>
                 <Card.Meta
                   avatar={<span className="icon-badge">{icons[w.icon]}</span>}
@@ -35,10 +42,10 @@ export default function About() {
                   description={w.description}
                 />
               </Card>
-            </Col>
-          ))}
-        </Row>
-      </section>
+            </InteractiveCard>
+          )}
+        />
+      </Section>
       <Skills />
       <Interests />
     </>

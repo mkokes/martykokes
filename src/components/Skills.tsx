@@ -1,9 +1,11 @@
 import { Typography } from "antd";
 import { skills } from "../data/skills";
+import Section from "./Section";
+import Pills from "./Pills";
 
 export default function Skills() {
   return (
-    <section className="section" aria-labelledby="skills">
+    <Section labelledBy="skills">
       <Typography.Title level={2} id="skills">
         Skills
       </Typography.Title>
@@ -11,16 +13,10 @@ export default function Skills() {
         {Object.entries(skills).map(([group, items]) => (
           <div key={group} className="skill-group">
             <Typography.Text className="skill-group-label">{group}</Typography.Text>
-            <ul className="pills">
-              {items.map((s) => (
-                <li key={s} className="pill">
-                  {s}
-                </li>
-              ))}
-            </ul>
+            <Pills items={items} label={group} />
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

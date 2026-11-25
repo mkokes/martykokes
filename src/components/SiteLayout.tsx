@@ -1,9 +1,13 @@
 import { Button, Drawer, Layout, Segmented, Typography } from "antd";
 import { DesktopOutlined, MenuOutlined, MoonOutlined, SunOutlined } from "@ant-design/icons";
+import { motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { profile } from "../data/profile";
+import { indicatorSpring } from "../motion";
 import type { ThemePref } from "../theme";
+import AnimatedOutlet from "./AnimatedOutlet";
+import ScrollProgress from "./ScrollProgress";
 import SocialLinks from "./SocialLinks";
 
 // Full URLs point at sibling sites (e.g. tours.martykokes.com) that share this header.
@@ -29,7 +33,13 @@ const themeOptions = [
   label: <span className="sr-only">{o.label}</span>,
 }));
 
-function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
+interface NavLinksProps {
+  onNavigate?: () => void;
+  /** Mark the current page with a dot that slides between links. */
+  indicator?: boolean;
+}
+
+function NavLinks({ onNavigate, indicator }: NavLinksProps) {
   return navItems.map((i) =>
     i.to.startsWith("https://") ? (
       <a key={i.to} href={i.to} className="nav-link">
@@ -37,7 +47,19 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
       </a>
     ) : (
       <NavLink key={i.to} to={i.to} end={i.to === "/"} className="nav-link" onClick={onNavigate}>
-        {i.label}
+        {({ isActive }) => (
+          <>
+            {i.label}
+            {indicator && isActive && (
+              <motion.span
+                layoutId="nav-indicator"
+                className="nav-indicator"
+                aria-hidden="true"
+                transition={indicatorSpring}
+              />
+            )}
+          </>
+        )}
       </NavLink>
     ),
   );
@@ -49,13 +71,8 @@ interface Props {
 }
 
 export default function SiteLayout({ themePref, onThemePrefChange }: Props) {
-  const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -71,7 +88,7 @@ export default function SiteLayout({ themePref, onThemePrefChange }: Props) {
           {profile.name}
         </Link>
         <nav className="nav-desktop" aria-label="Main">
-          <NavLinks />
+          <NavLinks indicator />
         </nav>
         <Segmented
           className="theme-toggle"
@@ -101,11 +118,10 @@ export default function SiteLayout({ themePref, onThemePrefChange }: Props) {
             <NavLinks onNavigate={() => setOpen(false)} />
           </nav>
         </Drawer>
+        <ScrollProgress />
       </Layout.Header>
       <Layout.Content className="page">
-        <div key={pathname} className="page-fade">
-          <Outlet />
-        </div>
+        <AnimatedOutlet />
       </Layout.Content>
       <Layout.Footer className="site-footer no-print">
         <SocialLinks iconOnly />

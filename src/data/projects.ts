@@ -9,6 +9,8 @@ import tours from "../assets/projects/tours.webp";
 import wouldbymarty from "../assets/projects/wouldbymarty.webp";
 
 export interface Project {
+  /** URL segment for the project's page, /projects/<slug>. */
+  slug: string;
   name: string;
   blurb: string;
   tech: string[];
@@ -38,6 +40,7 @@ export const projectsIntro =
 // Ordered most technical first.
 export const projects: Project[] = [
   {
+    slug: "marriage",
     name: "Marriage",
     blurb:
       "The three-deck rummy of Dashain nights, rebuilt so family can play together wherever they are. Start a table, share a four-letter code, and you're in. Every house rule is configurable, and bots fill the empty seats.",
@@ -47,6 +50,7 @@ export const projects: Project[] = [
     image: marriage,
   },
   {
+    slug: "styleguide-generator",
     name: "Styleguide Generator",
     blurb:
       "A step-by-step wizard for a brand's colors, type, spacing and rules. It checks every color pairing for contrast, previews the result live, and writes it all out as a STYLEGUIDE.md for AI coding agents plus CSS, Tailwind and design-token files. It's what styles this site.",
@@ -56,6 +60,7 @@ export const projects: Project[] = [
     image: styleguideGenerator,
   },
   {
+    slug: "tours",
     name: "Tours",
     blurb:
       "360° photo albums of places I've been. Drag to look around, follow arrows from one panorama to the next, and see where each was taken on a small map. Drop photos straight off the camera into a folder and the build resizes them and strips their GPS data.",
@@ -65,6 +70,7 @@ export const projects: Project[] = [
     image: tours,
   },
   {
+    slug: "moped-toolbox",
     name: "Moped Toolbox",
     blurb:
       "Pocket calculators I wanted in the garage: pick your bike and sprockets to see engine RPM and top speed, or work out how much two-stroke oil goes in the tank. Works offline once it's on your phone.",
@@ -74,6 +80,7 @@ export const projects: Project[] = [
     image: toolbox,
   },
   {
+    slug: "casserollers",
     name: "Casserollers",
     blurb:
       "The home of my Minneapolis moped gang. I moved it off WordPress to a fast static site with rally pages, a ride map, countdowns and calendar downloads, and kept every old link working.",
@@ -83,6 +90,7 @@ export const projects: Project[] = [
     image: casserollers,
   },
   {
+    slug: "fretomaton",
     name: "Fretomaton",
     blurb:
       "Printable fretboard templates for the guitars and ukuleles I build. Pick an instrument and scale length and it lays out every fret slot at true 1:1 scale, with bridge compensation for your string gauges. Works offline once installed.",
@@ -92,6 +100,7 @@ export const projects: Project[] = [
     image: fretomaton,
   },
   {
+    slug: "hexagon-tabletop-calculator",
     name: "Hexagon Tabletop Calculator",
     blurb:
       "A planner for my hexagon-tile tabletops. Set the table size, tile size and gap, and it works out how many hexagons to cut and how much epoxy to pour, with a live woodgrain preview of the layout.",
@@ -101,6 +110,7 @@ export const projects: Project[] = [
     image: hexcalculator,
   },
   {
+    slug: "martys-garage",
     name: "Marty's Garage",
     blurb:
       "My build logs, how-tos and reference tables from a garage full of vintage mopeds and small motorcycles. Migrated from WordPress, with full-text search and downloadable manuals.",
@@ -110,6 +120,7 @@ export const projects: Project[] = [
     image: martysgarage,
   },
   {
+    slug: "would-by-marty",
     name: "Would? By Marty",
     blurb:
       "A landing page for my woodworking. A video hero shows the shop, and my latest Instagram posts are pulled in when the site rebuilds each day.",

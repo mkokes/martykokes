@@ -1,9 +1,10 @@
 import { Typography } from "antd";
 import { education } from "../data/experience";
+import Section from "./Section";
 
 export default function Education() {
   return (
-    <section className="section" aria-labelledby="education">
+    <Section labelledBy="education">
       <Typography.Title level={2} id="education">
         Education
       </Typography.Title>
@@ -22,6 +23,6 @@ export default function Education() {
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }
