@@ -3,6 +3,8 @@ import fretomaton from "../assets/projects/fretomaton.webp";
 import hexcalculator from "../assets/projects/hexcalculator.webp";
 import marriage from "../assets/projects/marriage.webp";
 import martysgarage from "../assets/projects/martysgarage.webp";
+import segmentor from "../assets/projects/segmentor.webp";
+import soteriaModel from "../assets/projects/soteria-model.webp";
 import styleguideGenerator from "../assets/projects/styleguide-generator.webp";
 import toolbox from "../assets/projects/toolbox.webp";
 import tours from "../assets/projects/tours.webp";
@@ -60,6 +62,16 @@ export const projects: Project[] = [
     image: styleguideGenerator,
   },
   {
+    slug: "segmentor",
+    name: "Segmentor",
+    blurb:
+      "A studio for designing segmented and stave woodturned bowls and vases. Sculpt a vessel profile with Bezier curves, preview the glue-up and turned shape in 3D, check wall clearances, and print kerf-accurate cut sheets and 1:1 shop templates offline.",
+    tech: ["React", "TypeScript", "Three.js", "Vite", "PWA"],
+    url: "https://segmentor.wouldbymarty.com",
+    repo: "https://github.com/mkokes/segmentor",
+    image: segmentor,
+  },
+  {
     slug: "tours",
     name: "Tours",
     blurb:
@@ -110,6 +122,16 @@ export const projects: Project[] = [
     image: hexcalculator,
   },
   {
+    slug: "soteria-model",
+    name: "Soteria Model",
+    blurb:
+      "An open-source field guide and blueprint for community-owned mutual aid and protection networks. Built in English, Spanish, Somali and Arabic with printable Know Your Rights cards and offline PWA access so pages stay readable without a connection.",
+    tech: ["Astro", "Starlight", "TypeScript", "PWA", "GitHub Pages"],
+    url: "https://soteriamodel.com",
+    repo: "https://github.com/mkokes/soteria-model",
+    image: soteriaModel,
+  },
+  {
     slug: "martys-garage",
     name: "Marty's Garage",
     blurb:
@@ -124,7 +146,7 @@ export const projects: Project[] = [
     name: "Would? By Marty",
     blurb:
       "A landing page for my woodworking. A video hero shows the shop, and my latest Instagram posts are pulled in when the site rebuilds each day.",
-    tech: ["React", "Vite", "TypeScript", "Turborepo", "GitHub Actions"],
+    tech: ["React", "TypeScript", "Vite", "PWA", "GitHub Actions", "GitHub Pages"],
     url: "https://wouldbymarty.com",
     repo: "https://github.com/mkokes/wouldbymarty",
     image: wouldbymarty,
