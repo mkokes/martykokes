@@ -28,7 +28,9 @@ export interface Link {
 
 export interface NowProject {
   name: string;
+  status: string;
   tagline: string;
+  url: string;
   story: string[];
   tech: string[];
   done: string[];
@@ -155,7 +157,9 @@ export const projects: Project[] = [
 
 export const now: NowProject = {
   name: "ReceiptVault",
+  status: "Live",
   tagline: "Snap a paper receipt, get a searchable archive.",
+  url: "https://receiptvault.martykokes.com",
   story: [
     "ReceiptVault is a phone-first app for our household. Take a photo of a receipt (or several for a long one), and Amazon Textract pulls out the store, date, totals and line items into one shared archive we can search by store, date or amount.",
     "Really it's my excuse to build a real serverless AWS stack from end to end, on a budget of under $15 a month. The database pauses when nobody's using it, nothing sits in a VPC, and every piece is defined in Terraform.",
@@ -178,8 +182,9 @@ export const now: NowProject = {
     "API and Textract worker",
     "Terraform for the whole stack",
     "Offline-friendly PWA front end",
+    "First deploy to AWS",
   ],
-  next: ["First deploy"],
+  next: ["End-to-end household testing"],
   repos: [
     { label: "API", url: "https://github.com/mkokes/receiptvault-api" },
     { label: "Infrastructure", url: "https://github.com/mkokes/receiptvault-infra" },
