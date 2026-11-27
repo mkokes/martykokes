@@ -7,7 +7,7 @@ A small React single-page app with my background, work history, side projects an
 ## Features
 
 - Home page with hero, current project and the top three past projects
-- About, Experience, Projects and Contact pages
+- About, Experience, Projects (with individual project pages) and Contact pages
 - Light / System / Dark theme control; System follows the OS setting and is the default
 - Contact form backed by Formspree
 - Installable PWA with offline caching
@@ -16,6 +16,7 @@ A small React single-page app with my background, work history, side projects an
 
 - React 19, TypeScript, React Router 7
 - Ant Design 6, themed through `ConfigProvider` plus plain CSS
+- Motion (`motion/react`) for page transitions, shared-element morphs and scroll/pointer animations
 - Vite with `vite-plugin-pwa`
 - Vitest + Testing Library, oxlint, oxfmt, Husky
 - GitHub Pages via GitHub Actions
