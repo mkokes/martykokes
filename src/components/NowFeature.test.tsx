@@ -18,7 +18,7 @@ describe("NowFeature", () => {
     expect(
       within(section).getByRole("heading", { level: 3, name: /ReceiptVault/ }),
     ).toBeInTheDocument();
-    expect(within(section).getByText("In progress")).toBeInTheDocument();
+    expect(within(section).getByText(now.status)).toBeInTheDocument();
     expect(within(section).getByText(now.tagline)).toBeInTheDocument();
     for (const p of now.story) {
       expect(within(section).getByText(p)).toBeInTheDocument();
@@ -44,8 +44,12 @@ describe("NowFeature", () => {
     ).toEqual(now.next);
   });
 
-  it("links to the repos and the projects page", () => {
+  it("links to the live site, repos, and the projects page", () => {
     renderNow();
+    const live = screen.getByRole("link", { name: /Visit site/ });
+    expect(live).toHaveAttribute("href", now.url);
+    expect(live).toHaveAttribute("target", "_blank");
+    expect(live).toHaveAttribute("rel", "noopener noreferrer");
     for (const r of now.repos) {
       const link = screen.getByRole("link", { name: new RegExp(`${r.label} repo`) });
       expect(link).toHaveAttribute("href", r.url);

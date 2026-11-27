@@ -2,6 +2,7 @@ import { Card, Space, Typography } from "antd";
 import {
   CheckCircleFilled,
   CloudServerOutlined,
+  ExportOutlined,
   GithubOutlined,
   RightOutlined,
 } from "@ant-design/icons";
@@ -23,7 +24,7 @@ export default function NowFeature() {
           </span>
           <div>
             <Typography.Title level={3} style={{ margin: 0 }}>
-              {now.name} <span className="pill now-status">In progress</span>
+              {now.name} <span className="pill now-status">{now.status}</span>
             </Typography.Title>
             <Typography.Text type="secondary">{now.tagline}</Typography.Text>
           </div>
@@ -55,6 +56,9 @@ export default function NowFeature() {
           </div>
         </div>
         <Space size="large" wrap className="project-links">
+          <a href={now.url} target="_blank" rel="noopener noreferrer">
+            <ExportOutlined /> Visit site
+          </a>
           {now.repos.map((r) => (
             <a key={r.url} href={r.url} target="_blank" rel="noopener noreferrer">
               <GithubOutlined /> {r.label} repo

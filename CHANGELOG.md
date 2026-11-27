@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Updated ReceiptVault status on the home page to Live (`receiptvault.martykokes.com`) after its first AWS deploy.
 - Updated Would? By Marty tech stack (PWA and GitHub Pages instead of Turborepo) and refreshed project screenshots for Would? By Marty, Tours and Fretomaton.
 - New home page intro: "Developer by trade, maker by nature", covering software, AI, mechanical projects, electronics and woodworking.
 
